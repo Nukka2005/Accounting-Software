@@ -20,7 +20,7 @@ from PyQt5.QtWidgets import (
     QDoubleSpinBox,
 )
 import databaseHandler
-
+s
 MAIN_WINDOW_WIDTH_RATIO = 0.8
 MAIN_WINDOW_HEIGHT_RATIO = MAIN_WINDOW_WIDTH_RATIO
 WINDOW_WIDTH_RATIO = 0.8

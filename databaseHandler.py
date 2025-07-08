@@ -1,7 +1,7 @@
 import sqlite3
 import sys
 from pprint import pprint
-
+s
 con = None
 try:
     con = sqlite3.connect('sqlite.db')
