@@ -1,111 +1,149 @@
 # Inventory & Accounting Management System
-# A comprehensive desktop application for managing inventory, sales, purchases, customer/supplier records, and financial transactions built with Python and PyQt5.
-Features
-Core Modules
 
-Stock Management - Track inventory items with quantities and units
-Customer Management - Maintain customer records with contact details
-Supplier Management - Manage supplier information and relationships
-Sales Tracking - Record sales transactions with automatic stock updates
-Purchase Management - Log purchases with inventory adjustments
-Payment Processing - Track receipts from customers
-Payment Records - Monitor payments to suppliers
-Ledger System - Generate party-wise ledger reports with balance calculations
+![Python](https://img.shields.io/badge/Python-3.x-blue) ![PyQt5](https://img.shields.io/badge/GUI-PyQt5-green) ![SQLite](https://img.shields.io/badge/Database-SQLite-orange) ![License](https://img.shields.io/badge/License-Open%20Source-brightgreen)
 
-Key Capabilities
+**Tags:** 
 
-Real-time Stock Updates - Automatic inventory adjustments on sales/purchases
-Data Validation - Comprehensive input validation and error handling
-Transaction Integrity - Automatic stock quantity updates when adding/editing/deleting trades
-Ledger Generation - Party-wise transaction history with running balances
-User-friendly Interface - Clean, intuitive GUI with consistent styling
-Data Synchronization - Real-time data refresh to prevent conflicts
+A comprehensive desktop application for managing inventory, sales, purchases, customer/supplier records, and financial transactions built with Python and PyQt5.
 
-Technology Stack
+## Features
 
-Language: Python 3.x
-GUI Framework: PyQt5
-Database: SQLite3
-Architecture: Desktop application with modular design
+### Core Modules
 
-Database Schema
+- **Stock Management** - Track inventory items with quantities and units  
+
+- **Customer Management** - Maintain customer records with contact details  
+
+- **Supplier Management** - Manage supplier information and relationships  
+
+- **Sales Tracking** - Record sales transactions with automatic stock updates  
+
+- **Purchase Management** - Log purchases with inventory adjustments  
+
+- **Payment Processing** - Track receipts from customers  
+
+- **Payment Records** - Monitor payments to suppliers  
+
+- **Ledger System** - Generate party-wise ledger reports with balance calculations  
+
+### Key Capabilities
+
+- **Real-time Stock Updates** - Automatic inventory adjustments on sales/purchases  
+
+- **Data Validation** - Comprehensive input validation and error handling  
+  `#DataValidation` `#ErrorHandling`
+
+- **Transaction Integrity** - Automatic stock quantity updates when adding/editing/deleting trades  
+
+- **Ledger Generation** - Party-wise transaction history with running balances  
+
+- **User-friendly Interface** - Clean, intuitive GUI with consistent styling  
+
+- **Data Synchronization** - Real-time data refresh to prevent conflicts  
+  
+## Technology Stack
+
+| Component | Technology | Tags |
+|-----------|------------|------|
+| **Language** | Python 3.x | `#Python3` |
+| **GUI Framework** | PyQt5 | `#PyQt5` `#DesktopGUI` |
+| **Database** | SQLite3 | `#SQLite` `#Database` |
+| **Architecture** | Desktop application with modular design | `#ModularDesign` `#SoftwareArchitecture` |
+
+## Database Schema
+
 The application expects a SQLite database with the following tables:
-Stock Table
 
-id - Primary key
-name - Item name
-quantity - Current quantity (float)
-unit - Unit of measurement
+### Stock Table
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | Primary key | Unique identifier |
+| `name` | Text | Item name |
+| `quantity` | Float | Current quantity |
+| `unit` | Text | Unit of measurement |
 
-Parties Table
+### Parties Table
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | Primary key | Unique identifier |
+| `name` | Text | Party name |
+| `type` | Text | "Customer" or "Supplier" |
+| `number` | Text | Contact number |
+| `email` | Text | Email address |
+| `address` | Text | Physical address |
 
-id - Primary key
-name - Party name
-type - "Customer" or "Supplier"
-number - Contact number
-email - Email address
-address - Physical address
+### Trades Table
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | Primary key | Unique identifier |
+| `_date` | Text | Transaction date |
+| `type` | Text | "Sale" or "Purchase" |
+| `party_id` | Foreign key | References parties table |
+| `item_id` | Foreign key | References stock table |
+| `quantity` | Float | Quantity traded |
+| `rate` | Float | Price per unit |
 
-Trades Table
+### Payments Table
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | Primary key | Unique identifier |
+| `_date` | Text | Payment date |
+| `type` | Text | "Receipt" or "Payment" |
+| `party_id` | Foreign key | References parties table |
+| `amount` | Float | Payment amount |
 
-id - Primary key
-_date - Transaction date
-type - "Sale" or "Purchase"
-party_id - Foreign key to parties table
-item_id - Foreign key to stock table
-quantity - Quantity traded
-rate - Price per unit
+## Usage
 
-Payments Table
-
-id - Primary key
-_date - Payment date
-type - "Receipt" or "Payment"
-party_id - Foreign key to parties table
-amount - Payment amount
-
-Usage
-Main Dashboard
+### Main Dashboard
 The main window provides access to all modules through clearly labeled buttons:
+- **Sales, Purchases, Stock, Customers, Suppliers, Receipts, Payments, Ledgers**
 
-Sales, Purchases, Stock, Customers, Suppliers, Receipts, Payments, Ledgers
+### Adding Records
+1. Click the respective module button
+2. Click **"Add"** in the module window
+3. Fill in the required fields
+4. Confirm the transaction
 
-Adding Records
+### Editing Records
+1. Navigate to the relevant module
+2. Click **"Edit"**
+3. Enter the ID of the record to edit
+4. Modify the fields as needed
+5. Confirm changes
 
-Click the respective module button
-Click "Add" in the module window
-Fill in the required fields
-Confirm the transaction
+### Generating Ledgers
+1. Click **"Ledgers"** from the main menu
+2. Select a customer or supplier from the dropdown
+3. View the complete transaction history with running balance
 
-Editing Records
+## File Structure
 
-Navigate to the relevant module
-Click "Edit"
-Enter the ID of the record to edit
-Modify the fields as needed
-Confirm changes
+```
+eu-accounts/
+├── main.py              # Main application entry point and GUI
+├── databaseHandler.py   # Database operations and business logic
+├── sqlite.db           # SQLite database file
+├── Images/
+│   └── icon.ico        # Application icon
+└── README.md           # This file
+```
 
-Generating Ledgers
+## Key Features Explained
 
-Click "Ledgers" from the main menu
-Select a customer or supplier from the dropdown
-View the complete transaction history with running balance
+### Automatic Stock Management
+- ✅ Sales automatically reduce stock quantities
+- ✅ Purchases automatically increase stock quantities
+- ✅ Editing/deleting trades adjusts stock accordingly
 
-Key Features Explained
-Automatic Stock Management
+### Data Integrity
+- ✅ Input validation prevents invalid data entry
+- ✅ Transaction rollback on errors
+- ✅ Real-time sync checking to prevent concurrent modification issues
 
-Sales automatically reduce stock quantities
-Purchases automatically increase stock quantities
-Editing/deleting trades adjusts stock accordingly
+### Ledger System
+- ✅ Combines trade and payment data
+- ✅ Calculates running balances
+- ✅ Separates debit/credit based on party type (Customer vs Supplier)
 
-Data Integrity
 
-Input validation prevents invalid data entry
-Transaction rollback on errors
-Real-time sync checking to prevent concurrent modification issues
 
-Ledger System
-
-Combines trade and payment data
-Calculates running balances
-Separates debit/credit based on party type (Customer vs Supplier)
